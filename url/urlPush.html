@@ -1,0 +1,36 @@
+
+<!-- $url = "http://news.pts80.net/yanglaoquan2/api/?action=order_pro&control=add" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+var $url = "http://news.pts80.net/yanglaoquan2/api/?action=order_pro&control=add&payfsid=1&pstotal=10&alltotal=100&paytotal=80&address_id=4&express_id=9&bz=3r3";
+var objArray = new Array();
+var Things = [1, 2];
+// for (var i = Things.length - 1; i >= 0; i--) {
+// 	Things[i]
+// }
+
+$(document).ready(function() {
+	$.ajax({
+		url : $url,
+		dataType: 'json',
+		type: "post",
+		data : {
+			token : '10000939257050d9c8475a43f011f3732ff34cba',
+			goods : JSON.stringify(Things),
+		},
+		success: function (date) {
+							alert("OK");
+					}
+	})
+})
+</script>
+</body>
+</html>
