@@ -24,3 +24,13 @@ $c = date('Y-m-d');
 
 $d = substr(md5($a.$c.$b), 0, 10);
 echo $d;
+
+
+echo "\n".count([['id'=>1],['oo'=>2]])."\n";
+
+$e = '[{"create_time":"2017-03-08 08:02:35","type":"1","url":"http:\/\/"},{"create_time":"2017-03-08 08:02:55","type":"1"},{"create_time":"2017-03-08 08:03:12","type":"1"},{"create_time":"2017-03-08 08:23:34","type":"1"},{"create_time":"2017-03-08 08:25:22","type":"1"}]';
+$f = json_decode($e, true);
+
+unset($f[4]);
+
+print_r($f);
