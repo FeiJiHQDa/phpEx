@@ -23,3 +23,10 @@ if ($pos !== false) {
 //      echo "The string '$findme' was not found in the string '$mystring'";
 // }
 
+echo "\n";
+$c = 'beats_20170309172718';
+
+$d = strstr($c, '_', TRUE);
+$e = strpos ($c, '_');
+echo $d."\n";
+echo $e;
