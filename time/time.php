@@ -23,4 +23,12 @@ $times = date('Y-m-d H:i:s');
 
 echo $times;
 
+echo "\n";
+
+$a = strtotime('20170317104308');
+
+$b = date('Y-m-d H:i:s', $a);
+echo $a."\n";
+echo $b;
+
  ?>

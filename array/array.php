@@ -10,4 +10,7 @@ $arr = ['1', '2', '444'];
         print_r($category);
 print_r($arr);
         
-        
+$a['excel_id'] = '22';
+$a['base_com_com_name_10'] = 'BUSHIYONGGU';
+
+print_r($a);

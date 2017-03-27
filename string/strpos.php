@@ -29,4 +29,14 @@ $c = 'beats_20170309172718';
 $d = strstr($c, '_', TRUE);
 $e = strpos ($c, '_');
 echo $d."\n";
-echo $e;
+echo $e."\n";
+
+$f = ltrim(strstr($c, '_'), '_');
+echo $f."\n";
+
+$arr = [
+    'id' => 'idcard',
+    'id1' => 'idcard1',
+    'id2' => 'idcard2',
+    'id3' => 'idcard3',
+];
