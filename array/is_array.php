@@ -13,12 +13,13 @@ echo is_array(['e']);
 //http_build_query
 
 $a = [
-    'cha o ' => 1,
+    'chao' => 1,
     'wh' => 2,
 ];
 echo "\r\n";
-echo  http_build_query($a, '', '&');
+echo  http_build_query($a, '', '; ');
 
 echo "\r\n";
 echo  http_build_query($a);
 echo "\r\n";
+

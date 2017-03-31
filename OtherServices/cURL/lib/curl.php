@@ -95,7 +95,7 @@ class curl {
             $this->error = curl_errno($this->request) . ' - ' . curl_error($this->request);
         }
 
-
+        $response = $this->dealtCurl($response);
 
         curl_close($this->request);
 
@@ -161,17 +161,47 @@ class curl {
 
             // set cookies
             if (array_key_exists('cookies', $vars)) {
-                curl_setopt($this->request, CURLOPT_COOKIE, $vars['cookies']);
+                if (is_array($vars['cookies'])) {
+                    curl_setopt($this->request, CURLOPT_COOKIE, http_build_query($vars['cookies'], '', '; '));
+                }
             }
         }
     }
 
     /**
-     *
+     * 处理 cURL 返回的数据
+     * @param $response
      */
+
+    protected function dealtCurl($response) {
+
+        $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
+
+        preg_match_all($pattern, $response, $matches);
+        $headersString = array_pop($matches[0]);
+        $headers = explode("\r\n", str_replace("\r\n\r\n", '', $headersString));
+
+        // 获得 body 数据
+        $body = str_replace($headersString, '', $response);
+
+        $version_and_status = array_shift($headers);
+        preg_match('#HTTP/(\d\.\d)\s(\d\d\d)\s(.*)#', $version_and_status, $matches);
+        $headerArr['Http-Version'] = $matches[1];
+        $headerArr['Status-Code'] = $matches[2];
+        $headerArr['Status'] = $matches[2].' '.$matches[3];
+
+        # 标题转换为一个关联数组
+        foreach ($headers as $header) {
+            preg_match('#(.*?)\:\s(.*)#', $header, $matches);
+            $headerArr[$matches[1]] = $matches[2];
+        }
+
+        $merge['body'] = $body;
+        $merge['headers'] = $headerArr;
+
+        return $merge;
+    }
 }
 
-$re = new curl();
-$get = $re->get('http://checks.com/api/test/ok');
 
-print_r($get);
+
