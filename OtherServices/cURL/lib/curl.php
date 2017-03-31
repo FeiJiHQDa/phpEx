@@ -57,6 +57,7 @@ class curl {
             $url .= http_build_query($vars, '', '&');
         }
 
+        print_r($url);
         return  $this->request('GET', $url);
     }
 
