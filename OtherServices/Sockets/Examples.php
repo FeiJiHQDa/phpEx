@@ -11,12 +11,17 @@ error_reporting(E_ALL);
 set_time_limit(0);
 ob_implicit_flush();
 
-$address = '192.168.1.53';
-$port = 10000;
+$address = '127.0.0.1';
+$port    = 10000;
 
 if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
     echo "socket_create() failed: reason: " . socket_strerror(socket_last_error()) . "\n";
 }
+
+//if (!socket_set_option($sock, SOL_SOCKET, SO_REUSEADDR, 1)) {
+//    echo "socket_set_option() failed: reason: " . socket_strerror(socket_last_error($sock));
+//    exit;
+//}
 
 if (socket_bind($sock, $address, $port) === false) {
     echo "socket_bind() failed: reason: " . socket_strerror(socket_last_error($sock)) . "\n";
@@ -52,7 +57,7 @@ do {
             break;
         }
 
-        if ($buf ==  'shutdown') {
+        if ($buf == 'shutdown') {
             socket_close($msgsock);
             break 2;
         }
@@ -63,6 +68,6 @@ do {
 
     } while (true);
 
-} while(true);
+} while (true);
 
 socket_close($sock);
