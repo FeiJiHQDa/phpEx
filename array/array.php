@@ -14,3 +14,5 @@ $a['excel_id'] = '22';
 $a['base_com_com_name_10'] = 'BUSHIYONGGU';
 
 print_r($a);
+
+print_r( count([]));
