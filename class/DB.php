@@ -8,14 +8,14 @@
  */
 class DB
 {
-    private        $con = null;
+    private        $conn = null;
     private static $ins = null;
 
     public function __construct($a, $b, $c)
     {
 //        $this->connect('mysql:host=localhost;port=3306;dbname=test', 'root', '');
         $this->connect($a, $b, $c);
-        $this->con->query('set names utf8');
+        $this->conn->query('set names utf8');
     }
 
     // 单例模式
@@ -30,8 +30,8 @@ class DB
 
     public function connect($a, $b, $c)
     {
-        $this->con = new PDO($a, $b, $c);
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    //设置属性，设置错误：报告抛出Exceptions异常
+        $this->conn = new PDO($a, $b, $c);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    //设置属性，设置错误：报告抛出Exceptions异常
     }
 
     /*
@@ -39,7 +39,7 @@ class DB
      */
     public function query($sql, $arr = [])
     {
-        $res = $this->con->prepare($sql);
+        $res = $this->conn->prepare($sql);
         if (is_array($arr)) {
             $res->execute($arr);
             return $res;
@@ -87,5 +87,42 @@ class DB
         return null;
     }
 
+    // 更新
 
+
+    // 插入
+    public function insert($arr, $table) {
+
+    }
+
+    //返回受影响的行数
+    public function affected_rows($sql){
+        return $this -> conn -> exec($sql);
+    }
+
+    //返回最新的auto_increment列的自增长的值
+    public function insert_id(){
+        return $this -> conn -> lastInsertId();
+    }
+
+    // 支持 [id=>1, num=>2...] && [[num => 3, id => 2], [id=>4, num=>288]]   判断维度 http://blog.csdn.net/lhn_hpu/article/details/52539236
+    public function inserts($arr, $table) {
+        $sql = 'insert into ' . $table . ' (' . implode(',',array_keys($arr)) . ')';
+        $sql .= ' values (\'';
+        $sql .= implode("','",array_values($arr));
+        $sql .= '\')';
+
+
+        $this->query($sql, $arr);
+        return $this->insert_id();
+    }
+
+    public function update($sql, $arr) {
+        $this->query($sql, $arr);
+        return $this->insert_id();
+    }
+
+    public function insertGetId($table, $arr) {
+
+    }
 }

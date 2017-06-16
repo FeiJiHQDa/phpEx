@@ -17,6 +17,9 @@ $pdo = new PDO('mysql:host=localhost;port=3306;dbname=test','root','');
 
 $DB = DB::setInstall('mysql:host=localhost;port=3306;dbname=test','root','');
 //$ox = $DB->getAll("SELECT * FROM test_prepare ");
-$ox = $DB->getOne("SELECT num FROM test_prepare WHERE id = ?", [2]);
+//$ox = $DB->getOne("SELECT num FROM test_prepare WHERE id = ?", [2]);
 
-var_dump($ox);
+//$up = $DB->update('update test_prepare set num = ? WHERE id = ?', [44, 1]);
+$up = $DB->affected_rows('update test_prepare set num = 45 WHERE id = 1');
+//var_dump($ox);
+var_dump($up);
