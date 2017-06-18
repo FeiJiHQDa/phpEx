@@ -90,11 +90,6 @@ class DB
     // 更新
 
 
-    // 插入
-    public function insert($arr, $table) {
-
-    }
-
     //返回受影响的行数
     public function affected_rows($sql){
         return $this -> conn -> exec($sql);
@@ -106,12 +101,21 @@ class DB
     }
 
     // 支持 [id=>1, num=>2...] && [[num => 3, id => 2], [id=>4, num=>288]]   判断维度 http://blog.csdn.net/lhn_hpu/article/details/52539236
-    public function inserts($arr, $table) {
-        $sql = 'insert into ' . $table . ' (' . implode(',',array_keys($arr)) . ')';
-        $sql .= ' values (\'';
-        $sql .= implode("','",array_values($arr));
-        $sql .= '\')';
+    public function insert($table, $arr) {
 
+        // 判断 一维数组
+        if (count($arr) == count($arr, 1)) {
+            $keySQL = implode(',',array_keys($arr));
+            $valSQL = implode("','",array_values($arr));
+        } else {
+            $keySQL = implode(',',array_keys($arr));
+            $valSQL = implode("','",array_values($arr));
+        }
+
+        $sql = 'insert into ' . $table . ' (' . $keySQL. ')';
+        $sql .= ' values (\'';
+        $sql .= $valSQL;
+        $sql .= '\')';
 
         $this->query($sql, $arr);
         return $this->insert_id();
