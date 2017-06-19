@@ -103,22 +103,35 @@ class DB
     // 支持 [id=>1, num=>2...] && [[num => 3, id => 2], [id=>4, num=>288]]   判断维度 http://blog.csdn.net/lhn_hpu/article/details/52539236
     public function insert($table, $arr) {
 
+        $func = function($value) {
+            return '?';
+        };
+
         // 判断 一维数组
         if (count($arr) == count($arr, 1)) {
-            $keySQL = implode(',',array_keys($arr));
-            $valSQL = implode("','",array_values($arr));
+
+            $array_keys = array_keys($arr);
+
+            $keySQL = implode(',', $array_keys);
+            $valSQL = implode("','",array_map($func, array_values($arr)) );
+
         } else {
             $keySQL = implode(',',array_keys($arr));
             $valSQL = implode("','",array_values($arr));
         }
+
 
         $sql = 'insert into ' . $table . ' (' . $keySQL. ')';
         $sql .= ' values (\'';
         $sql .= $valSQL;
         $sql .= '\')';
 
-        $this->query($sql, $arr);
-        return $this->insert_id();
+//        print_r($sql);
+//        print_r(array_values($arr));
+//        exit();
+
+        $this->query($sql, array_values($arr));
+        return '1';
     }
 
     public function update($sql, $arr) {
@@ -128,5 +141,11 @@ class DB
 
     public function insertGetId($table, $arr) {
 
+    }
+
+
+    // 将 insert value 转换 ？
+    private function valueQ($n) {
+        return '?';
     }
 }
