@@ -22,8 +22,10 @@ $DB = DB::setInstall('mysql:host=localhost;port=3306;dbname=test','root','');
 //$up = $DB->update('update test_prepare set num = ? WHERE id = ?', [44, 1]);
 //$up = $DB->affected_rows('update test_prepare set num = 45 WHERE id = 1');
 //var_dump($ox);
-$ins = $DB->insert('test_prepare', ['num' => 1]);
+$ins = $DB->insert('test_prepare', ['num' => 999]);
 
+
+//$ins = $DB->query("insert into test_prepare (num) values ('?')", [3]);
 // [['num' => 1, 'version' => '399'], ['num' => 333, 'version' => '1.23']]
 // [['num' => 1], ['num' => 333]]
 

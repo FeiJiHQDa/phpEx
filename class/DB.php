@@ -108,30 +108,31 @@ class DB
         };
 
         // 判断 一维数组
+
         if (count($arr) == count($arr, 1)) {
 
             $array_keys = array_keys($arr);
 
             $keySQL = implode(',', $array_keys);
-            $valSQL = implode("','",array_map($func, array_values($arr)) );
+            $valSQL = implode(",",array_map($func, array_values($arr)) );
 
-        } else {
-            $keySQL = implode(',',array_keys($arr));
-            $valSQL = implode("','",array_values($arr));
         }
-
+//        else {
+//            $keySQL = implode(',',array_keys($arr));
+//            $valSQL = implode("','",array_values($arr));
+//        }
 
         $sql = 'insert into ' . $table . ' (' . $keySQL. ')';
-        $sql .= ' values (\'';
+        $sql .= ' values (';
         $sql .= $valSQL;
-        $sql .= '\')';
+        $sql .= ')';
 
 //        print_r($sql);
 //        print_r(array_values($arr));
 //        exit();
 
         $this->query($sql, array_values($arr));
-        return '1';
+        return $this->insert_id();
     }
 
     public function update($sql, $arr) {
