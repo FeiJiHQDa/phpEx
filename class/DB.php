@@ -111,9 +111,7 @@ class DB
 
         if (count($arr) == count($arr, 1)) {
 
-            $array_keys = array_keys($arr);
-
-            $keySQL = implode(',', $array_keys);
+            $keySQL = implode(',', array_keys($arr));
             $valSQL = implode(",",array_map($func, array_values($arr)) );
 
         }
