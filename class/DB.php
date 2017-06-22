@@ -5,6 +5,8 @@
  * User: HJKLI
  * Date: 2017/6/15
  * Time: 14:27
+ *
+ *  支持 MySQL 和 SQLit
  */
 class DB
 {
@@ -15,7 +17,7 @@ class DB
     {
 //        $this->connect('mysql:host=localhost;port=3306;dbname=test', 'root', '');
         $this->connect($a, $b, $c);
-        $this->conn->query('set names utf8');
+//        $this->conn->query('set names utf8');
     }
 
     // 单例模式
@@ -28,10 +30,17 @@ class DB
         return self::$ins;
     }
 
-    public function connect($a, $b, $c)
+    public function connect( $a, $b, $c)
     {
         $this->conn = new PDO($a, $b, $c);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    //设置属性，设置错误：报告抛出Exceptions异常
+    }
+
+    /*
+     *  设置 数据库编码
+     */
+    public function encode($code=['utf8']) {
+        $this->query('set names ?', $code);
     }
 
     /*
@@ -107,27 +116,17 @@ class DB
             return '?';
         };
 
-        // 判断 一维数组
-
-        if (count($arr) == count($arr, 1)) {
+//        if (count($arr) == count($arr, 1)) {
 
             $keySQL = implode(',', array_keys($arr));
             $valSQL = implode(",",array_map($func, array_values($arr)) );
 
-        }
-//        else {
-//            $keySQL = implode(',',array_keys($arr));
-//            $valSQL = implode("','",array_values($arr));
-//        }
 
         $sql = 'insert into ' . $table . ' (' . $keySQL. ')';
         $sql .= ' values (';
         $sql .= $valSQL;
         $sql .= ')';
 
-//        print_r($sql);
-//        print_r(array_values($arr));
-//        exit();
 
         $this->query($sql, array_values($arr));
         return $this->insert_id();
