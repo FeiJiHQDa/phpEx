@@ -14,7 +14,10 @@
 // echo '-';
 
 date_default_timezone_set('PRC');
-$time   = strtotime(date("Y-m-d", time()));
+$time   = strtotime(date("Y-m-d"));
+
+var_dump( $time);
+
 $toTime = strtotime(date('Y-m-d H:i:s', $time));
 //echo $toTime;
 

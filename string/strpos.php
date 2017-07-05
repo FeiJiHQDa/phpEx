@@ -40,3 +40,7 @@ $arr = [
     'id2' => 'idcard2',
     'id3' => 'idcard3',
 ];
+
+//if (intval('000001160307'))
+
+echo intval('000001160307');
