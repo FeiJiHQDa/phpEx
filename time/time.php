@@ -58,4 +58,64 @@ if (isset($g)) {
     echo 'wooot';
 }
 
-?>
+echo "\n";
+
+
+echo 'Single digit odd numbers from range():  ';
+//foreach (range(1, 9, 2) as $number) {
+//    echo "$number ";
+//}
+
+print_r(range(1, 9, 2));
+
+
+function rangex($start, $limit, $step = 1) {
+    $item = [];
+    if ($start < $limit) {
+        if ($step <= 0) {
+            throw new LogicException('Step must be +ve');
+        }
+
+        for ($i = $start; $i <= $limit; $i += $step) {
+            $item[] = $i;
+        }
+    }
+    return $item;
+}
+
+function xrange($start, $limit, $step = 1) {
+//    $item = [];
+    if ($start < $limit) {
+        if ($step <= 0) {
+            throw new LogicException('Step must be +ve');
+        }
+
+        for ($i = $start; $i <= $limit; $i += $step) {
+            yield $i;
+        }
+    }else {
+        if ($step >= 0) {
+            throw new LogicException('Step must be -ve');
+        }
+
+        for ($i = $start; $i >= $limit; $i += $step) {
+            yield $i;
+        }
+    }
+
+
+//    return $item;
+}
+
+print_r(rangex(1, 9, 2));
+//print_r(xrange(1, 9, 2));
+echo "\n";
+
+echo 'Single digit odd numbers from xrange(): ';
+foreach (xrange(1, 9, 2) as $number) {
+    echo "$number ";
+}
+
+
+
+echo "\n";

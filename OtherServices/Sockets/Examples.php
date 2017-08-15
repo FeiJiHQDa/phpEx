@@ -4,6 +4,7 @@
  * User: HJKLI
  * Date: 2017/4/24
  * Time: 10:44
+ *   这个只能链接 一个 例子， 不能处理任意链接数
  */
 
 error_reporting(E_ALL);
