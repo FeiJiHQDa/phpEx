@@ -10,3 +10,7 @@ $ip = getenv('Path');
 
 
 print_r($ip);
+
+echo "\n";
+
+print_r(getenv());
