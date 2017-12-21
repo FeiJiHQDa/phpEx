@@ -43,4 +43,11 @@ $arr = [
 
 //if (intval('000001160307'))
 
-echo intval('000001160307');
+echo intval('000001160307')."\n";
+
+
+// substr_replace — 替换字符串的子串
+$g = '#3C2201888888888888888888880fa';
+
+echo $g[2]."\n";
+echo substr_replace($g, '1E', 1, 2)."\n";

@@ -45,13 +45,35 @@ $t = getTime();
 // 不加锁
 // 不加锁 && % 1000
 $txt = '';
-for ($i = 0; $i < 1168000; $i++) {
-    $txt .= '000001' . generate_fun($chars_one, 3) . generate_fun($chars_twe, 3) . generate_fun($chars_three, 6) . "\n";
+$i = 0;
+$j = 0;
+$arrb = [];
+//for ($i = 0; $i < 1168000; $i++) {
+while ($i != 1168000) {
 
+    $j++;
+
+    $txt2 = '000001' . generate_fun($chars_one, 3) . generate_fun($chars_twe, 3) . generate_fun($chars_three, 6);
+
+    if (in_array($txt2, $arrb)) {
+        continue;
+    }
+
+
+
+    $arrb[] = $txt2;
+    $txt .= $txt2 . "\n";
+    $i++;
 //    if ($i % 1000 == 0) {
 //
 //        $txt = '';
 //    }
+
+    if ($i % 10000 == 0) {
+        echo "\n".$i . ' --- '. $j;
+    }
 }
-file_put_contents('1168000.txt', trim($txt),   LOCK_EX);
+file_put_contents('116800071.txt', trim($txt),   LOCK_EX);
 runTime($t);
+
+echo "\n".$i . ' --- '. $j;

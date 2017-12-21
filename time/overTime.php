@@ -20,3 +20,10 @@ echo "\n";
 $all = ['12' => '3000', 'vo' => '299', 'vs' => '299'];
 
 print_r(in_array(299, $all));
+
+echo "\n";
+
+print_r(date('Y-m-d H:i:s'));
+echo "\n";
+
+print_r(time());

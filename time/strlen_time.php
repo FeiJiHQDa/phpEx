@@ -28,17 +28,27 @@ if (($toHour >= 6 && $toHour <= 8) || ($toHour >= 16 && $toHour <= 19)) {
 }
 echo $toHour . "\n";
 
+
+// 时区 转换
 date_default_timezone_set("UTC");
 echo date("Y-m-d H:i:s", mktime(6, 54, 02)) . "\n";
 echo gmdate("Y-m-d H:i:s", mktime(6, 54, 02)) . "\n";
 
 date_default_timezone_set('PRC');
 
-$字符串 = '000222';
-echo strlen($字符串) . "\n";
-
-for ($i = 0; $i < strlen($字符串); $i++) {
-    echo $字符串[$i];
-}
+//$字符串 = '000222';
+//echo strlen($字符串) . "\n";
+//
+//for ($i = 0; $i < strlen($字符串); $i++) {
+//    echo $字符串[$i];
+//}
 
 //Jan 01 2000 00:00:00Dec 31 1999 16:00:00
+
+// 结束时间 - 开始时间  = 分钟
+$days=ceil((time()-strtotime("2017-12-14 13:20"))/60);
+$days1= bcdiv( time()-strtotime("2017-12-14 13:20"), 60, 3);
+
+print_r($days);
+echo "\n";
+print_r($days1);

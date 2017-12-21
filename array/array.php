@@ -16,3 +16,11 @@ $a['base_com_com_name_10'] = 'BUSHIYONGGU';
 print_r($a);
 
 print_r( count([]));
+
+echo "\n";
+
+print_r(array_merge($arr, $a));
+
+echo "\n";
+
+echo empty($o) ? 'ox|| ' : $o;

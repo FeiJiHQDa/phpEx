@@ -119,3 +119,5 @@ foreach (xrange(1, 9, 2) as $number) {
 
 
 echo "\n";
+
+echo strtotime("now"), "\n";
