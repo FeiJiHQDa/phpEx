@@ -19,21 +19,23 @@ class WinService
     //定义服务名称
     var $info_name = "Exsample PHP Service";
     //定义php.exe存放路径
-//    var $path = "C:\\wamp\\php\\php.exe";
-    var $path = "C:\\xampp\htdocs\\tcp\\location_udp\\php\\php.exe";
+//    var $path = "C:\\xampp\\php\\php.exe";
+    var $path = '';
+//    var $path = "C:\\xampp\htdocs\\tcp\\location_udp\\php\\php.exe";
     //定义所要执行的程序
 //    var $params = "D:\\localhost\\Service\\win32_service.php";
-    var $params = "C:\\xampp\htdocs\\tcp\\location_udp\\start_web.php";
+    var $params = "C:\\xampp\htdocs\\tcp\\location_udp\\start_web.php" . '" run';
     //定义程序分隔执行时间，单位：秒
     var $sleep = 5;
 
     public function __construct($name = '', $infoName = '', $param = '')
     {
-        set_time_limit(0);
-        ob_implicit_flush();
+//        set_time_limit(0);
+//        ob_implicit_flush();
         $this->name = $name;
         $this->info_name = $infoName;
         $this->params = $param;
+        $this->path =  '"' . dirname(PHP_BINARY) .'\\php.exe"';
     }
 
     public function install()

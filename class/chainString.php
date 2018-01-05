@@ -13,7 +13,7 @@
 class MyString {
     private $string;
 
-    public function MyString($str) {
+    public function __construct($str) {
         $this->string = $str;
     }
 
